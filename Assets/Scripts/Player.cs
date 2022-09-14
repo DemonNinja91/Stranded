@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public bool side_walk;
     //The transform component for the rotation of the RigidBody
     public Transform playerTrans;
+
+    public bool isAiming;
     
 
 
@@ -150,20 +152,23 @@ public class Player : MonoBehaviour
             if (Input.GetMouseButtonUp(1))
             {
                 playerAnim.ResetTrigger("idle aim");
-                playerAnim.SetTrigger("idle");
+                playerAnim.SetTrigger("idle"); 
+                isAiming = true;
             }
-            //aiming and moving
-            if (side_walk == true)
+           
+            if(isAiming == true)
             {
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
-                    playerAnim.SetTrigger("aim walk left");
+                    playerAnim.SetTrigger("aim move forward");
                     playerAnim.ResetTrigger("idle aim");
+                    walking = true;
                 }
-                if (Input.GetKeyUp(KeyCode.A))
+                if (Input.GetKeyUp(KeyCode.W))
                 {
-                    playerAnim.ResetTrigger("aim walk left");
+                    playerAnim.ResetTrigger("aim move forward");
                     playerAnim.SetTrigger("idle aim");
+                    walking = false;
                 }
             }
 

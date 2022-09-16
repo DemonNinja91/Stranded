@@ -113,6 +113,8 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             playerAnim.SetTrigger("arrow draw");
+            playerAnim.ResetTrigger("idle");
+            
             arrow_drawn = true;
         }
         if (Input.GetKeyDown(KeyCode.Q))

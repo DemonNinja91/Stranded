@@ -49,7 +49,6 @@ namespace SunTemple
 				scriptIsEnabled = false;
 				return;
 			}
-
 			Cam = Camera.main;
 			if (!Cam) {
 				Debug.LogWarning (this.GetType ().Name + ", No objects tagged with MainCamera in Scene", gameObject);
@@ -61,12 +60,8 @@ namespace SunTemple
 			if (cursor != null) {
 				cursor.SetCursorToDefault ();
 			}
-
 					
         }
-
-
-
 		void Update()
 		{
 			if (scriptIsEnabled) {
@@ -74,21 +69,16 @@ namespace SunTemple
 					Rotate ();
 				}
 
-				if (Input.GetKeyDown (KeyCode.Mouse0)) {
-					TryToOpen ();
+				if (Input.GetKeyDown(KeyCode.E))
+				{
+					TryToOpen();
 				}
-
-
 				if (cursor != null) {
 					CursorHint ();
 				}
 			}
 
 		} 
-
-
-
-
 		void TryToOpen(){
 			if (Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) <= MaxDistance){	
 
@@ -102,9 +92,6 @@ namespace SunTemple
 				}
 			}
 		}
-
-
-
 		void CursorHint(){
 			if (Mathf.Abs(Vector3.Distance(transform.position, Player.transform.position)) <= MaxDistance){	
 				Ray ray = Cam.ScreenPointToRay (new Vector3 (Screen.width / 2, Screen.height / 2, 0));
@@ -121,10 +108,6 @@ namespace SunTemple
 				}
 			}
 		}
-
-
-
-
         public void Activate()
         {
             if (DoorClosed)
@@ -132,13 +115,6 @@ namespace SunTemple
             else
                 Close();
         }
-
-
-
-       
-
-
-
         void Rotate()
         {
             CurrentLerpTime += Time.deltaTime * RotationSpeed;
@@ -155,13 +131,8 @@ namespace SunTemple
 			if (CurrentLerpTime == LerpTime) {
 				Rotating = false;
 				DoorCollider.enabled = true;
-			}
-              
-           
+			}  
         }
-
-
-
         void Open()
         {
 			DoorCollider.enabled = false;
@@ -171,9 +142,6 @@ namespace SunTemple
             CurrentLerpTime = 0;
             Rotating = true;
         }
-
-
-
         void Close()
         {
 			DoorCollider.enabled = false;

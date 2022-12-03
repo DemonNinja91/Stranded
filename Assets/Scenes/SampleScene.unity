@@ -490,9 +490,10 @@ GameObject:
   - component: {fileID: 1786596587}
   - component: {fileID: 1786596586}
   - component: {fileID: 1786596591}
+  - component: {fileID: 1786596592}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -619,6 +620,25 @@ MonoBehaviour:
   arrow_drawn: 0
   side_walk: 0
   playerTrans: {fileID: 1786596590}
+  isAiming: 0
+--- !u!143 &1786596592
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786596585}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1997381747
 PrefabInstance:
   m_ObjectHideFlags: 0

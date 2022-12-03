@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+       /* if (Input.GetKey(KeyCode.W))
         {
             playerRigid.velocity = transform.forward * w_speed * Time.deltaTime;
         }
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             playerRigid.velocity = -transform.right * side_speed * Time.deltaTime;
-        }
+        }*/
 
     }
     void Start()

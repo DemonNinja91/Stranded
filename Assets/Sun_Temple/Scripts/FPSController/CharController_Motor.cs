@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 namespace SunTemple{
 
 
-	public class CharController_Motor : MonoBehaviour {
+	public class CharController_Motor : MonoBehaviourPunCallbacks {
 
 		public float speed = 10.0f;
 		public float sensitivity = 60.0f;
@@ -21,43 +22,59 @@ namespace SunTemple{
 
 		void Start(){
 
-			character = GetComponent<CharacterController> ();
+            if (!photonView.IsMine)
+            {
+                //GetComponentInChildren<Camera>().enabled = false;
+				GetComponent<CharacterController>().enabled = false;
+            } else { 
 
-			webGLRightClickRotation = false;
+				character = GetComponent<CharacterController> ();
 
-			if (Application.platform == RuntimePlatform.WebGLPlayer) {
-				webGLRightClickRotation = true;
-				sensitivity = sensitivity * 1.5f;
-			}
+				webGLRightClickRotation = false;
+
+				if (Application.platform == RuntimePlatform.WebGLPlayer) {
+					webGLRightClickRotation = true;
+					sensitivity = sensitivity * 1.5f;
+				}
+            }
 
 
-		}
+        }
 
 
 
 
 
 		void FixedUpdate(){
-			moveFB = Input.GetAxis ("Horizontal") * speed;
-			moveLR = Input.GetAxis ("Vertical") * speed;
 
-			rotHorizontal = Input.GetAxisRaw ("Mouse X") * sensitivity;
-			rotVertical = Input.GetAxisRaw ("Mouse Y") * sensitivity;
+			if (photonView.IsMine)
+			{
+                moveFB = Input.GetAxis("Horizontal") * speed;
+                moveLR = Input.GetAxis("Vertical") * speed;
+
+                rotHorizontal = Input.GetAxisRaw("Mouse X") * sensitivity;
+                rotVertical = Input.GetAxisRaw("Mouse Y") * sensitivity;
 
 
-			Vector3 movement = new Vector3 (moveFB, gravity, moveLR);
+                Vector3 movement = new Vector3(moveFB, gravity, moveLR);
 
 
-			if (webGLRightClickRotation) {
-				if (Input.GetKey (KeyCode.Mouse0)) {
-					CameraRotation (cam, rotHorizontal, rotVertical);
-				}
-			} else if (!webGLRightClickRotation) {
-				CameraRotation (cam, rotHorizontal, rotVertical);
-			}
+                if (webGLRightClickRotation)
+                {
+                    if (Input.GetKey(KeyCode.Mouse0))
+                    {
+                        CameraRotation(cam, rotHorizontal, rotVertical);
+                    }
+                }
+                else if (!webGLRightClickRotation)
+                {
+                    CameraRotation(cam, rotHorizontal, rotVertical);
+                }
 
-			movement = transform.rotation * movement;
-			character.Move (movement * Time.fixedDeltaTime);
+                movement = transform.rotation * movement;
+                character.Move(movement * Time.fixedDeltaTime);
+            }
+			
 		}
 
 

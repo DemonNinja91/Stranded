@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class MouseControl : MonoBehaviour
+public class MouseControl : MonoBehaviourPunCallbacks
 {
     public float RotationSpeed = 1;
     public Transform Target, Player;
@@ -12,12 +13,19 @@ public class MouseControl : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+        if (!photonView.IsMine)
+        {
+            GetComponentInChildren<Camera>().enabled = false;
+        }
     }
 
     void LateUpdate()
     {
-        CamControl();
+        if (photonView.IsMine)
+        {
+            CamControl();
+        }
+        
 
     }
 

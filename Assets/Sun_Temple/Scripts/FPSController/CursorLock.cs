@@ -37,12 +37,7 @@ namespace Sun_Temple{
 				Cursor.lockState = CursorLockMode.None;
 				Cursor.visible = true;
 			}
-		}
-
-			
-
-
-			
+		}	
 	
 	}
 
